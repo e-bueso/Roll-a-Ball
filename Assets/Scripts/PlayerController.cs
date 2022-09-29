@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     // La variable speed es pública para que la fijemos desde el editor a 10
     public float speed = 0;
+
+    public TextMeshProUGUI countText; 
 
     // Y estas dos serán de ambiente porque vamos a implementar una sync propia cámara-player
     private Rigidbody rb;
@@ -20,6 +23,8 @@ public class PlayerController : MonoBehaviour
         // Guardamos el Rigidbody
         rb = GetComponent<Rigidbody>();
         count=0;
+
+        SetCountText();
     }
 
     void OnMove(InputValue movementValue) {
@@ -28,6 +33,10 @@ public class PlayerController : MonoBehaviour
         // Guardamos el movimiento 2D en sus variables de ambiente
         movementX=movementVector.x;
         movementY=movementVector.y;
+    }
+
+    void SetCountText() {
+        countText.text="Count: " + count.ToString();
     }
 
     void FixedUpdate() {
@@ -43,6 +52,8 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             count++;
             Debug.Log("Collide: " + count);
+
+            SetCountText();
         }
     } 
 
