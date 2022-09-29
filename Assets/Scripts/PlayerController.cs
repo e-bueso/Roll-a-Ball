@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
 
+    private int count;
     public TextMeshProUGUI countText; 
 
     // Y estas dos serán de ambiente porque vamos a implementar una sync propia cámara-player
